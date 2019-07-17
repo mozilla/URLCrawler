@@ -1,6 +1,6 @@
 import json
 import matplotlib.pyplot as plt
-import urlparse
+import urllib.parse
 import domain_utils as du
 files = ['calvin_internal_links.json','thomas_internal_links.json','rui_internal_links.json','louis_internal_links.json']
 jsondata = []

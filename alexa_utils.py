@@ -1,4 +1,4 @@
-from StringIO import StringIO
+from io import StringIO
 import requests
 import zipfile
 import random
@@ -17,7 +17,7 @@ def get_top_1m(location):
     location = os.path.expanduser(location)
     site_list = os.path.join(location, 'top-1m.csv')
     if not os.path.isfile(site_list):
-        print "%s does not exist, downloading a copy." % site_list
+        print(("%s does not exist, downloading a copy." % site_list))
         resp = requests.get(EC2_LIST)
         with zipfile.ZipFile(StringIO(resp.content), 'r') as zpf:
             contents = zpf.read(zpf.infolist()[0])
@@ -78,7 +78,7 @@ def sample_top_sites(location, include_rank=False,
     location = os.path.expanduser(location)
     top_1m = get_top_1m(location)
     if include_rank:
-        top_1m = zip(range(len(top_1m)), top_1m)
+        top_1m = list(zip(list(range(len(top_1m))), top_1m))
     sites = list()
     for sl in slices:
         sites.extend(random.sample(top_1m[sl[1]:sl[2]], sl[0]))

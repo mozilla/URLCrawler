@@ -23,4 +23,4 @@ table = dynamodb.create_table(
 
 table.meta.client.get_waiter('table_exists').wait(TableName='users')
 
-print(table.item_count)
+print((table.item_count))

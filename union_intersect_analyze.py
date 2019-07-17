@@ -1,6 +1,6 @@
 import json
 import matplotlib.pyplot as plt
-import urlparse
+import urllib.parse
 import domain_utils as du
 files = ['union.json','intersect.json']
 jsondata = []
@@ -11,9 +11,9 @@ for f in files:
     jsondata.append(load)
 
 print("====>Size of union set")
-print len(jsondata[0])
+print(len(jsondata[0]))
 print("====>Size of intersection set")
-print len(jsondata[1])
+print(len(jsondata[1]))
 
 f = open("difference.txt","w")
 difference = set(jsondata[0]).intersection(set(jsondata[1]))

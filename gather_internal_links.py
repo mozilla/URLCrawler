@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import multiprocessing
-import urlparse 
+import urllib.parse 
 import requests
 import json
 import os
@@ -36,11 +36,11 @@ def get_internal_links_depth(site, depth):
             else:
                 resp = requests.get(site, headers=headers, timeout=60)
         if resp.status_code != 200:
-            print("Non-200 response code %i for site %s" % (
-                resp.status_code, site))
+            print(("Non-200 response code %i for site %s" % (
+                resp.status_code, site)))
             return (site, list())
         if resp.content is None:
-            print("No content returned for site %s" % site)
+            print(("No content returned for site %s" % site))
             return (site, list())
 
         # Current URL after HTTP Redirects
@@ -54,13 +54,13 @@ def get_internal_links_depth(site, depth):
             href = tag.get('href')
             if href is None:
                 continue
-            href = urlparse.urljoin(current_url, href)
+            href = urllib.parse.urljoin(current_url, href)
 
             if (not href.startswith('http') or
                     du.get_ps_plus_1(href) == top_ps1):
             #if (not href.startswith('http')):
                 continue
-            links.add(urlparse.urldefrag(href)[0])
+            links.add(urllib.parse.urldefrag(href)[0])
 
         # Craw Next Level
         links_next_layer = set()
@@ -71,7 +71,7 @@ def get_internal_links_depth(site, depth):
     except (KeyboardInterrupt, SystemExit):
         raise
     except Exception as e:
-        print("Exception while requesting %s\n%s" % (site, str(e)))
+        print(("Exception while requesting %s\n%s" % (site, str(e))))
         return (site, list())
 
 def get_internal_links(site):
@@ -86,14 +86,14 @@ def collect_homepage_links(sites, nprocesses=10):
                        chunksize=100)
     pool.close()
     pool.join()
-    print("Saving results to disk %s" % ALL_INTERNAL_LINKS)
-    print len(results[0][1])
+    print(("Saving results to disk %s" % ALL_INTERNAL_LINKS))
+    print(len(results[0][1]))
     with open(ALL_INTERNAL_LINKS, 'w') as f:
         json.dump(results, f)
-    print "====>Finish time is:"
+    print("====>Finish time is:")
     finish = time.time()
-    print finish
-    print finish - start
+    print(finish)
+    print(finish - start)
 
 
 def sample_top_1m():
@@ -108,10 +108,10 @@ def sample_top_1m():
 
 
 if __name__ == '__main__':
-    print "====>Start time is:"
+    print("====>Start time is:")
     start = time.time()
-    print start
+    print(start)
     sites = sample_top_1m()
     shuffle(sites)
-    print sites
+    print(sites)
     collect_homepage_links(sites, nprocesses=30)

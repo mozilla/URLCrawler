@@ -26,7 +26,7 @@ for k in range(len(jsondata)):
 
 intersect = (results[0].intersection(results[1])).intersection(results[2]).intersection(results[3])
 f = open('intersect.json', 'w')
-print(len(intersect))
+print((len(intersect)))
 json.dump(list(intersect), f)
 f.close()
 

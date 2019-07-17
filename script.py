@@ -20,9 +20,9 @@ for i in range(len(jsondata)):
       finaltld[tld] = finaltld.get(tld, 0) + 1
 
 sort = sorted(finaltld.items())
-x, y = zip(*sort)
+x, y = list(zip(*sort))
 
-xvals = range(len(x))
+xvals = list(range(len(x)))
 
 plt.figure(figsize=(20,10))
 plt.xticks(xvals, x, rotation="vertical")

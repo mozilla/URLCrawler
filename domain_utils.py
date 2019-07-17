@@ -1,5 +1,5 @@
-from __future__ import absolute_import
-from __future__ import print_function
+
+
 from publicsuffix import PublicSuffixList, fetch
 from ipaddress import ip_address
 from six.moves.urllib.parse import urlparse

@@ -1,6 +1,6 @@
 import json
 import matplotlib.pyplot as plt
-import urlparse
+import urllib.parse
 import domain_utils as du
 
 jsonfile = open('thomas_internal_links.json')
@@ -29,4 +29,4 @@ for key in result:
         else:
             frequencey_dict[result[key]] = 1
 print (result)
-print len(result)
+print(len(result))
