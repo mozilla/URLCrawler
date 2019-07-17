@@ -1,4 +1,4 @@
-# URL Crawler
+# SRG Pre-Crawl Utils
 
 Python scripts for sampling a slice of a crawl list (such as Alexa Top 1M), crawling through each site and fetching the internal links for each site.
 
