@@ -1,11 +1,14 @@
-from io import StringIO
+""" A collection of utilities for crawl scripts """
+from io import BytesIO
 import requests
 import zipfile
 import random
+import shutil
 import json
+import glob
 import os
 
-EC2_LIST = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'
+ALEXA_LIST = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip'
 
 
 def get_top_1m(location):
@@ -17,19 +20,20 @@ def get_top_1m(location):
     location = os.path.expanduser(location)
     site_list = os.path.join(location, 'top-1m.csv')
     if not os.path.isfile(site_list):
-        print(("%s does not exist, downloading a copy." % site_list))
-        resp = requests.get(EC2_LIST)
-        with zipfile.ZipFile(StringIO(resp.content), 'r') as zpf:
+        print("%s does not exist, downloading a copy." % site_list)
+        resp = requests.get(ALEXA_LIST)
+        print(resp)
+        with zipfile.ZipFile(BytesIO(resp.content), 'r') as zpf:
             contents = zpf.read(zpf.infolist()[0])
         if not os.path.isdir(location):
             os.makedirs(location)
-        with open(site_list, 'w') as f:
+        with open(site_list, 'wb') as f:
             f.write(contents)
     else:
-        with open(site_list, 'r') as f:
+        with open(site_list, 'rb') as f:
             contents = f.read()
 
-    return [x.split(',')[-1] for x in contents.split('\n')]
+    return [x.split(',')[-1] for x in contents.decode('utf8').split('\n')]
 
 
 def get_sampled_sites(location, include_rank=False,
@@ -59,6 +63,7 @@ def sample_top_sites(location, include_rank=False,
                              (15000, 100000, 1000000)]):
     """
     Returns a subsample of sites from the top 1 million given by `slices`
+
     Parameters
     ----------
     location : str
@@ -69,6 +74,7 @@ def sample_top_sites(location, include_rank=False,
     slices : list of tuples
         List of slices to sample. Each slice should be given as follows:
         (# of sites, start_index, end_index)
+
     Returns
     -------
     list of str or list of tuples
@@ -78,8 +84,27 @@ def sample_top_sites(location, include_rank=False,
     location = os.path.expanduser(location)
     top_1m = get_top_1m(location)
     if include_rank:
-        top_1m = list(zip(list(range(len(top_1m))), top_1m))
+        top_1m = zip(range(len(top_1m)), top_1m)
     sites = list()
     for sl in slices:
         sites.extend(random.sample(top_1m[sl[1]:sl[2]], sl[0]))
     return sites
+
+
+def clear_tmp_folder():
+    """
+    Clear the tmp folder of directories / files that
+    may have been missed during cleanup.
+    """
+    tmpfiles = glob.glob('/tmp/tmp*')
+    for tmpfile in tmpfiles:
+        try:
+            shutil.rmtree(tmpfile)
+        except OSError:
+            pass
+    tmpfiles = glob.glob('/tmp/.X*-lock')
+    for tmpfile in tmpfiles:
+        try:
+            os.remove(tmpfile)
+        except OSError:
+            pass

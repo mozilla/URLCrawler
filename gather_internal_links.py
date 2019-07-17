@@ -7,10 +7,10 @@ import os
 import time
 from random import shuffle
 
-# Available: https://github.com/citp/OpenWPM/blob/master/automation/utilities/domain_utils.py  # noqa
+# Available: https://github.com/mozilla/OpenWPM/blob/master/automation/utilities/domain_utils.py  # noqa
 import domain_utils as du
-# Available: https://gist.github.com/englehardt/802d1872d6bda2084723489a82540cb3  # noqa
-import alexa_utils as au
+# Available: https://github.com/mozilla/openwpm-crawler/blob/master/utilities/crawl_utils.py  # noqa
+import crawl_utils as cu
 DEPTH = 1
 DATA_DIR = os.path.expanduser('~/data/')
 ALL_INTERNAL_LINKS = 'internal_links.json'
@@ -97,7 +97,7 @@ def collect_homepage_links(sites, nprocesses=10):
 
 
 def sample_top_1m():
-    return au.sample_top_sites(
+    return cu.sample_top_sites(
         location=DATA_DIR,
         include_rank=True,
         slices = [(10000, 0, 10000)]
