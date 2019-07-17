@@ -13,7 +13,7 @@ import domain_utils as du
 import crawl_utils as cu
 DEPTH = 1
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
-ALL_INTERNAL_LINKS = 'internal_links.json'
+ALL_INTERNAL_LINKS = os.path.join(DATA_DIR, 'internal_links.json')
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0'  # noqa
 
 
