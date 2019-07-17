@@ -14,7 +14,7 @@ import crawl_utils as cu
 DEPTH = 1
 DATA_DIR = os.path.expanduser('~/data/')
 ALL_INTERNAL_LINKS = 'internal_links.json'
-USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0'  # noqa
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0'  # noqa
 
 def get_internal_links_depth(site, depth):
     """Request and parse internal links from `site`"""
