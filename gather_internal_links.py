@@ -96,7 +96,9 @@ def collect_homepage_links(sites, nprocesses=10):
     print("====>Finish time is:")
     finish = time.time()
     print(finish)
-    print(finish - start)
+    minutes = (finish - start)/60
+    print("====>Crawl duration:")
+    print("%.2f minutes" % minutes)
 
 
 def sample_top_1m():
