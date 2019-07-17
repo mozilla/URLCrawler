@@ -84,7 +84,7 @@ def sample_top_sites(location, include_rank=False,
     location = os.path.expanduser(location)
     top_1m = get_top_1m(location)
     if include_rank:
-        top_1m = zip(range(len(top_1m)), top_1m)
+        top_1m = list(zip(list(range(len(top_1m))), top_1m))
     sites = list()
     for sl in slices:
         sites.extend(random.sample(top_1m[sl[1]:sl[2]], sl[0]))

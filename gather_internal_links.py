@@ -12,9 +12,10 @@ import domain_utils as du
 # Available: https://github.com/mozilla/openwpm-crawler/blob/master/utilities/crawl_utils.py  # noqa
 import crawl_utils as cu
 DEPTH = 1
-DATA_DIR = os.path.expanduser('~/data/')
+DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
 ALL_INTERNAL_LINKS = 'internal_links.json'
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0) Gecko/20100101 Firefox/68.0'  # noqa
+
 
 def get_internal_links_depth(site, depth):
     """Request and parse internal links from `site`"""
@@ -73,6 +74,7 @@ def get_internal_links_depth(site, depth):
     except Exception as e:
         print(("Exception while requesting %s\n%s" % (site, str(e))))
         return (site, list())
+
 
 def get_internal_links(site):
     return get_internal_links_depth(site, depth=DEPTH)
