@@ -26,6 +26,7 @@ def get_internal_links_depth(site, depth):
         result.append(site)
         return None, result
     try:
+        print("Visiting %s..." % site)
         try:
             if depth == DEPTH:
                 resp = requests.get('http://' + site, headers=headers, timeout=60)
