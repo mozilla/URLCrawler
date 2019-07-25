@@ -1,9 +1,7 @@
 import json
-import matplotlib.pyplot as plt
-import urllib.parse
-import domain_utils as du
+import upstream.domain_utils as du
 
-jsonfile = open('thomas_internal_links.json')
+jsonfile = open('data/internal_links.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 

@@ -2,7 +2,7 @@ import json
 import pickle
 import matplotlib.pyplot as plt
 
-jsonfile = open('internal_links.json')
+jsonfile = open('data/internal_links.json')
 jsonstr = jsonfile.read()
 jsondata = json.loads(jsonstr)
 
@@ -28,8 +28,8 @@ plt.figure(figsize=(20,10))
 plt.xticks(xvals, x, rotation="vertical")
 plt.plot(xvals, y)
 #plt.show()
-plt.savefig('plot.png')
+plt.savefig('data/plot.png')
 
-savefile = open("dict.pkl", "wb")
+savefile = open("data/dict.pkl", "wb")
 pickle.dump(finaltld, savefile)
 savefile.close()
