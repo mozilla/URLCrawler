@@ -1,6 +1,8 @@
 # SRG Pre-Crawl Utils
 
-Python scripts for sampling a slice of a crawl list (such as Alexa Top 1M), crawling through each site and fetching the internal links for each site.
+The Mozilla SRG team's python scripts for:
+ * Sampling a slice of a crawl list (such as Alexa Top 1M), crawling through each site and fetching the internal links for each site.
+ * Joining several versions of such crawl results, producing ....
 
 ## Usage instructions
 
@@ -25,3 +27,7 @@ This will fetch Alexa Top 10k, crawl through each site and gather one depth of i
 ```
 python gather_internal_links.py
 ```
+
+### Join/union ...
+
+...
