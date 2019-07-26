@@ -8,9 +8,9 @@ import time
 from random import shuffle
 
 # Available: https://github.com/mozilla/OpenWPM/blob/master/automation/utilities/domain_utils.py  # noqa
-import domain_utils as du
+import upstream.domain_utils as du
 # Available: https://github.com/mozilla/openwpm-crawler/blob/master/utilities/crawl_utils.py  # noqa
-import crawl_utils as cu
+import upstream.crawl_utils as cu
 DEPTH = 1
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
 ALL_INTERNAL_LINKS = os.path.join(DATA_DIR, 'internal_links.json')
